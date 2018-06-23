@@ -1,4 +1,6 @@
 
+set(CMAKE_CXX_STANDARD 17)
+
 # gui mate
 cmake_minimum_required (VERSION 2.6)
 project (gui-mate)
@@ -8,6 +10,7 @@ add_library(gui-mate STATIC ${sources})
 
 
 # Example using xoverlay
+
 set(OpenGL_GL_PREFERENCE "GLVND")
 find_package(PNG) # We need to link all this again since we prebuilt them staticly
 find_package(GLEW)
@@ -15,6 +18,9 @@ find_package(OpenGL)
 find_package(X11)
 find_package(Freetype)
 if(PNG_FOUND AND GLEW_FOUND AND OPENGL_FOUND AND X11_FOUND AND FREETYPE_FOUND)
+  add_subdirectory(libglez)
+  set_target_properties(glez PROPERTIES COMPILE_FLAGS "" LINK_FLAGS "")
+
   project (example)
 
   file(GLOB_RECURSE sources "${CMAKE_CURRENT_SOURCE_DIR}/example-src/*.c*")
@@ -23,7 +29,7 @@ if(PNG_FOUND AND GLEW_FOUND AND OPENGL_FOUND AND X11_FOUND AND FREETYPE_FOUND)
   # is longe
   target_link_libraries(example gui-mate
                         "${CMAKE_CURRENT_SOURCE_DIR}/example-src/lib/libxoverlay.a"
-                        "${CMAKE_CURRENT_SOURCE_DIR}/example-src/lib/libglez.a"
+                         glez
                          ${PNG_LIBRARIES} GL GLU GLEW ${FREETYPE_LIBRARIES}
                          ${X11_X11_LIB} ${X11_Xext_LIB} ${X11_Xfixes_LIB})
 endif()

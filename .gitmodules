@@ -1,0 +1,4 @@
+[submodule "libglez"]
+	path = libglez
+	url = https://github.com/nullworks/libglez/
+	branch = cached-rendering
