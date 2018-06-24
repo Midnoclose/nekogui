@@ -2,8 +2,8 @@
 set(CMAKE_CXX_STANDARD 17)
 
 # gui mate
-cmake_minimum_required (VERSION 2.6)
-project (gui-mate)
+cmake_minimum_required(VERSION 2.6)
+project(gui-mate)
 
 file(GLOB_RECURSE sources "${CMAKE_CURRENT_SOURCE_DIR}/gui-mate/*.c*")
 add_library(gui-mate STATIC ${sources})
@@ -21,7 +21,7 @@ if(PNG_FOUND AND GLEW_FOUND AND OPENGL_FOUND AND X11_FOUND AND FREETYPE_FOUND)
   add_subdirectory(libglez)
   set_target_properties(glez PROPERTIES COMPILE_FLAGS "" LINK_FLAGS "")
 
-  project (example)
+  project(example)
 
   file(GLOB_RECURSE sources "${CMAKE_CURRENT_SOURCE_DIR}/example-src/*.c*")
   add_executable(example ${sources})
