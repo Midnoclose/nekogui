@@ -10,58 +10,58 @@ namespace input {
 
 // Stores potential conversions between xlib's keycodes and cathooks catkeys. Add more as nessesary! /usr/include/X11/keysymdef.h
 static const std::pair<int, CatKey> xlibToCatVar[] = {
-	{XK_0, CATKEY_0}, {XK_1, CATKEY_1}, {XK_2, CATKEY_2},
-	{XK_3, CATKEY_3}, {XK_4, CATKEY_4}, {XK_5, CATKEY_5},
-	{XK_6, CATKEY_6}, {XK_7, CATKEY_7}, {XK_8, CATKEY_8},
-	{XK_9, CATKEY_9}, {XK_A, CATKEY_A}, {XK_B, CATKEY_B},
-	{XK_C, CATKEY_C}, {XK_D, CATKEY_D}, {XK_E, CATKEY_E},
-	{XK_F, CATKEY_F}, {XK_G, CATKEY_G}, {XK_H, CATKEY_H},
-	{XK_I, CATKEY_I}, {XK_J, CATKEY_J}, {XK_K, CATKEY_K},
-	{XK_L, CATKEY_L}, {XK_M, CATKEY_M}, {XK_N, CATKEY_N},
-	{XK_O, CATKEY_O}, {XK_P, CATKEY_P}, {XK_Q, CATKEY_Q},
-	{XK_R, CATKEY_R}, {XK_S, CATKEY_S}, {XK_T, CATKEY_T},
-	{XK_U, CATKEY_U}, {XK_V, CATKEY_V}, {XK_W, CATKEY_W},
-	{XK_X, CATKEY_X}, {XK_Y, CATKEY_Y}, {XK_Z, CATKEY_Z},
+	{XK_0, CatKey::k0}, {XK_1, CatKey::k1}, {XK_2, CatKey::k2},
+	{XK_3, CatKey::k3}, {XK_4, CatKey::k4}, {XK_5, CatKey::k5},
+	{XK_6, CatKey::k6}, {XK_7, CatKey::k7}, {XK_8, CatKey::k8},
+	{XK_9, CatKey::k9}, {XK_A, CatKey::kA}, {XK_B, CatKey::kB},
+	{XK_C, CatKey::kC}, {XK_D, CatKey::kD}, {XK_E, CatKey::kE},
+	{XK_F, CatKey::kF}, {XK_G, CatKey::kG}, {XK_H, CatKey::kH},
+	{XK_I, CatKey::kI}, {XK_J, CatKey::kJ}, {XK_K, CatKey::kK},
+	{XK_L, CatKey::kL}, {XK_M, CatKey::kM}, {XK_N, CatKey::kN},
+	{XK_O, CatKey::kO}, {XK_P, CatKey::kP}, {XK_Q, CatKey::kQ},
+	{XK_R, CatKey::kR}, {XK_S, CatKey::kS}, {XK_T, CatKey::kT},
+	{XK_U, CatKey::kU}, {XK_V, CatKey::kV}, {XK_W, CatKey::kW},
+	{XK_X, CatKey::kX}, {XK_Y, CatKey::kY}, {XK_Z, CatKey::kZ},
 
-	{XK_Escape, CATKEY_ESCAPE}, {XK_bracketleft, CATKEY_LBRACKET},
-	{XK_bracketright, CATKEY_RBRACKET}, {XK_semicolon, CATKEY_SEMICOLON},
-	{XK_apostrophe, CATKEY_APOSTROPHE}, {XK_apostrophe, CATKEY_COMMA},
-	{XK_period, CATKEY_PERIOD}, {XK_slash, CATKEY_SLASH},
-	{XK_backslash, CATKEY_BACKSLASH}, {XK_minus, CATKEY_MINUS},
-	{XK_equal, CATKEY_EQUAL}, {XK_Return, CATKEY_ENTER},
-	{XK_space, CATKEY_SPACE}, {XK_BackSpace, CATKEY_BACKSPACE},
-	{XK_Tab, CATKEY_TAB}, {XK_Caps_Lock, CATKEY_CAPSLOCK},
+	{XK_Escape, CatKey::kEscape}, {XK_bracketleft, CatKey::kLBracket},
+	{XK_bracketright, CatKey::kRBracket}, {XK_semicolon, CatKey::kSemicolon},
+	{XK_apostrophe, CatKey::kApostrophe}, {XK_apostrophe, CatKey::kComma},
+	{XK_period, CatKey::kPeriod}, {XK_slash, CatKey::kSlash},
+	{XK_backslash, CatKey::kBackslash}, {XK_minus, CatKey::kHyphen},
+	{XK_equal, CatKey::kEqual}, {XK_Return, CatKey::kEnter},
+	{XK_space, CatKey::kSpace}, {XK_BackSpace, CatKey::kBackspace},
+	{XK_Tab, CatKey::kTab}, {XK_Caps_Lock, CatKey::kCapslock},
 
-	{XK_Insert, CATKEY_INSERT}, {XK_Delete, CATKEY_DELETE},
-	{XK_Home, CATKEY_HOME}, {XK_End, CATKEY_END},
-	{XK_Page_Up, CATKEY_PAGEUP}, {XK_Page_Down, CATKEY_PAGEDOWN},
+	{XK_Insert, CatKey::kInsert}, {XK_Delete, CatKey::kDelete},
+	{XK_Home, CatKey::kHome}, {XK_End, CatKey::kEnd},
+	{XK_Page_Up, CatKey::kPageUp}, {XK_Page_Down, CatKey::kPageDown},
 
-	{XK_Shift_L, CATKEY_LSHIFT}, {XK_Shift_R, CATKEY_RSHIFT},
-	{XK_Alt_L, CATKEY_LALT}, {XK_Alt_R, CATKEY_RALT},
-	{XK_Control_L, CATKEY_LCONTROL}, {XK_Control_R, CATKEY_RCONTROL},
+	{XK_Shift_L, CatKey::kLShift}, {XK_Shift_R, CatKey::kRShift},
+	{XK_Alt_L, CatKey::kLAlt}, {XK_Alt_R, CatKey::kRAlt},
+	{XK_Control_L, CatKey::kLControl}, {XK_Control_R, CatKey::kRControl},
 
-	{XK_KP_0, CATKEY_PAD_0}, {XK_KP_1, CATKEY_PAD_1}, {XK_KP_2, CATKEY_PAD_2},
-	{XK_KP_3, CATKEY_PAD_3}, {XK_KP_4, CATKEY_PAD_4}, {XK_KP_5, CATKEY_PAD_5},
-	{XK_KP_6, CATKEY_PAD_6}, {XK_KP_7, CATKEY_PAD_7}, {XK_KP_8, CATKEY_PAD_8},
-	{XK_KP_9, CATKEY_PAD_9},
+	{XK_KP_0, CatKey::kPad0}, {XK_KP_1, CatKey::kPad1}, {XK_KP_2, CatKey::kPad2},
+	{XK_KP_3, CatKey::kPad3}, {XK_KP_4, CatKey::kPad4}, {XK_KP_5, CatKey::kPad5},
+	{XK_KP_6, CatKey::kPad6}, {XK_KP_7, CatKey::kPad7}, {XK_KP_8, CatKey::kPad8},
+	{XK_KP_9, CatKey::kPad9},
 
-	{XK_KP_Divide, CATKEY_PAD_DIVIDE}, {XK_KP_Multiply, CATKEY_PAD_MULTIPLY},
-	{XK_KP_Subtract, CATKEY_PAD_MINUS},	{XK_KP_Add, CATKEY_PAD_PLUS},
-	{XK_KP_Enter, CATKEY_PAD_ENTER}, {XK_KP_Decimal, CATKEY_PAD_DECIMAL},
+	{XK_KP_Divide, CatKey::kPadDivide}, {XK_KP_Multiply, CatKey::kPadMultiply},
+	{XK_KP_Subtract, CatKey::kPadMinus}, {XK_KP_Add, CatKey::kPadPlus},
+	{XK_KP_Enter, CatKey::kPadEnter}, {XK_KP_Decimal, CatKey::kPadPeriod},
 
-	{XK_Up, CATKEY_UP}, {XK_Left, CATKEY_LEFT},
-	{XK_Down, CATKEY_DOWN}, {XK_Right, CATKEY_RIGHT},
+	{XK_Up, CatKey::kUp}, {XK_Left, CatKey::kLeft},
+	{XK_Down, CatKey::kDown}, {XK_Right, CatKey::kRight},
 
-	{XK_F1, CATKEY_F1}, {XK_F2, CATKEY_F2}, {XK_F3, CATKEY_F3},
-	{XK_F4, CATKEY_F4}, {XK_F5, CATKEY_F5}, {XK_F6, CATKEY_F6},
-	{XK_F7, CATKEY_F7}, {XK_F8, CATKEY_F8}, {XK_F9, CATKEY_F9},
-	{XK_F10, CATKEY_F10}, {XK_F11, CATKEY_F11}, {XK_F12, CATKEY_F12},
+	{XK_F1, CatKey::kF1}, {XK_F2, CatKey::kF2}, {XK_F3, CatKey::kF3},
+	{XK_F4, CatKey::kF4}, {XK_F5, CatKey::kF5}, {XK_F6, CatKey::kF6},
+	{XK_F7, CatKey::kF7}, {XK_F8, CatKey::kF8}, {XK_F9, CatKey::kF9},
+	{XK_F10, CatKey::kF10}, {XK_F11, CatKey::kF11}, {XK_F12, CatKey::kF12},
 
-	{XK_Pointer_DfltBtnPrev, CATKEY_M_WHEEL_UP}, {XK_Pointer_DfltBtnNext, CATKEY_M_WHEEL_DOWN}
+	{XK_Pointer_DfltBtnPrev, CatKey::kMWheelUp}, {XK_Pointer_DfltBtnNext, CatKey::kMWheelDown}
 };
 
 // Used to store depressed keys
-static std::bitset<CATKEY_COUNT> pressed_buttons;
+static std::bitset<static_cast<int>(CatKey::kCount)> pressed_buttons;
 
 // Mouse info
 static std::pair<int, int> mouse(-1, -1);
@@ -76,7 +76,7 @@ void RefreshInput() {
 	// Get window bounds
 	if (xoverlay_library.width != bounds.first || xoverlay_library.height != bounds.second) { // Activate on change
 		bounds = std::make_pair(xoverlay_library.width, xoverlay_library.height);
-		input::bounds_event.Emit(bounds);
+		input::events::bounds.Emit(bounds);
 	}
 
 	// Update mouse position
@@ -85,23 +85,23 @@ void RefreshInput() {
 		if ((mousex != mouse.first || mousey != mouse.second) // Activate on change
 		 && (mousex >= 0 && mousey >= 0 && mousex <= bounds.first && mousey <= bounds.second)) { // Clamp positions to the window
 			mouse = std::make_pair(mousex, mousey);
-			input::mouse_event.Emit(mouse);
+			input::events::mouse.Emit(mouse);
 		}
 		// We did a pointer query so check our buttons too!
 		bool s = (mask_return & (Button1Mask));
-		if (s != pressed_buttons[CATKEY_MOUSE_1]){
-			pressed_buttons[CATKEY_MOUSE_1] = s;
-			input::key_event.Emit(CATKEY_MOUSE_1, s);
+		if (s != pressed_buttons[static_cast<int>(CatKey::kMouse1)]){
+			pressed_buttons[static_cast<int>(CatKey::kMouse1)] = s;
+			input::events::key.Emit(CatKey::kMouse1, s);
 		}
 		s = (mask_return & (Button2Mask));
-		if (s != pressed_buttons[CATKEY_MOUSE_2]){
-			pressed_buttons[CATKEY_MOUSE_2] = s;
-			input::key_event.Emit(CATKEY_MOUSE_2, s);
+		if (s != pressed_buttons[static_cast<int>(CatKey::kMouse2)]){
+			pressed_buttons[static_cast<int>(CatKey::kMouse2)] = s;
+			input::events::key.Emit(CatKey::kMouse2, s);
 		}
 		s = (mask_return & (Button3Mask));
-		if (s != pressed_buttons[CATKEY_MOUSE_3]){
-			pressed_buttons[CATKEY_MOUSE_3] = s;
-			input::key_event.Emit(CATKEY_MOUSE_3, s);
+		if (s != pressed_buttons[static_cast<int>(CatKey::kMouse3)]){
+			pressed_buttons[static_cast<int>(CatKey::kMouse3)] = s;
+			input::events::key.Emit(CatKey::kMouse3, s);
 		}
 		// Mouse 4-5 dont work for some reason. XLib doesnt like them...
 	}
@@ -117,16 +117,16 @@ void RefreshInput() {
 
 		// Use the keymap with bitwise logic to get state, oof this took forever to make
 		bool pressed = (keys[current_key / 8] & (1 << (current_key % 8)));
-		if (pressed != pressed_buttons[current.second]){
-			pressed_buttons[current.second] = pressed;
-			input::key_event.Emit(current.second, pressed);
+		if (pressed != pressed_buttons[static_cast<int>(current.second)]){
+			pressed_buttons[static_cast<int>(current.second)] = pressed;
+			input::events::key.Emit(current.second, pressed);
 		}
 	}
 }
 
 
 bool GetKey(CatKey k) {
-	return pressed_buttons[k];
+	return pressed_buttons[static_cast<int>(k)];
 }
 std::pair<int, int> GetMouse() {
 	return mouse;

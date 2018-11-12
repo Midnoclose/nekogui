@@ -1,73 +1,138 @@
 
-enum CatKey {
-	CATKEY_NONE,
-	CATKEY_0, CATKEY_1, CATKEY_2,
-	CATKEY_3, CATKEY_4, CATKEY_5,
-	CATKEY_6, CATKEY_7, CATKEY_8,
-	CATKEY_9, CATKEY_A, CATKEY_B,
-	CATKEY_C, CATKEY_D, CATKEY_E,
-	CATKEY_F, CATKEY_G, CATKEY_H,
-	CATKEY_I, CATKEY_J, CATKEY_K,
-	CATKEY_L, CATKEY_M, CATKEY_N,
-	CATKEY_O, CATKEY_P, CATKEY_Q,
-	CATKEY_R, CATKEY_S, CATKEY_T,
-	CATKEY_U, CATKEY_V, CATKEY_W,
-	CATKEY_X, CATKEY_Y, CATKEY_Z,
+#pragma once
 
-	CATKEY_ESCAPE, CATKEY_LBRACKET,
-	CATKEY_RBRACKET, CATKEY_SEMICOLON,
-	CATKEY_APOSTROPHE, CATKEY_BACKQUOTE,
-	CATKEY_COMMA, CATKEY_PERIOD, CATKEY_SLASH,
-	CATKEY_BACKSLASH, CATKEY_MINUS, CATKEY_EQUAL,
-	CATKEY_ENTER, CATKEY_SPACE, CATKEY_BACKSPACE,
-	CATKEY_TAB, CATKEY_CAPSLOCK,
+enum class CatKey {
+	kNone,
+	k0, k1, k2,
+	k3, k4, k5,
+	k6, k7, k8,
+	k9, kA, kB,
+	kC, kD, kE,
+	kF, kG, kH,
+	kI, kJ, kK,
+	kL, kM, kN,
+	kO, kP, kQ,
+	kR, kS, kT,
+	kU, kV, kW,
+	kX, kY, kZ,
 
-	CATKEY_INSERT, CATKEY_DELETE,
-	CATKEY_HOME, CATKEY_END,
-	CATKEY_PAGEUP, CATKEY_PAGEDOWN,
+	kEscape, kLBracket,
+	kRBracket, kSemicolon,
+	kApostrophe, kBackquote,
+	kComma, kPeriod, kSlash,
+	kBackslash, kHyphen, kEqual,
+	kEnter, kSpace, kBackspace,
+	kTab, kCapslock,
 
-	CATKEY_LSHIFT, CATKEY_RSHIFT,
-	CATKEY_LALT, CATKEY_RALT,
-	CATKEY_LCONTROL, CATKEY_RCONTROL,
+	kInsert, kDelete, // cant use delete lol
+	kHome, kEnd,
+	kPageUp, kPageDown,
 
-	CATKEY_PAD_0, CATKEY_PAD_1, CATKEY_PAD_2,
-	CATKEY_PAD_3, CATKEY_PAD_4, CATKEY_PAD_5,
-	CATKEY_PAD_6, CATKEY_PAD_7, CATKEY_PAD_8,
-	CATKEY_PAD_9,
+	kLShift, kRShift,
+	kLAlt, kRAlt,
+	kLControl, kRControl,
 
-	CATKEY_PAD_DIVIDE, CATKEY_PAD_MULTIPLY,
-	CATKEY_PAD_MINUS, CATKEY_PAD_PLUS,
-	CATKEY_PAD_ENTER, CATKEY_PAD_DECIMAL,
+	kPad0, kPad1, kPad2,
+	kPad3, kPad4, kPad5,
+	kPad6, kPad7, kPad8,
+	kPad9,
 
-	CATKEY_UP, CATKEY_LEFT,
-	CATKEY_DOWN, CATKEY_RIGHT,
+	kPadDivide, kPadMultiply,
+	kPadMinus,  kPadPlus,
+	kPadEnter,  kPadPeriod,
 
-	CATKEY_F1, CATKEY_F2, CATKEY_F3,
-	CATKEY_F4, CATKEY_F5, CATKEY_F6,
-	CATKEY_F7, CATKEY_F8, CATKEY_F9,
-	CATKEY_F10, CATKEY_F11, CATKEY_F12,
+	kUp, kLeft,
+	kDown, kRight,
 
-	CATKEY_MOUSE_1, CATKEY_MOUSE_2,
-	CATKEY_MOUSE_3, CATKEY_MOUSE_4,
-	CATKEY_MOUSE_5,
-	CATKEY_M_WHEEL_UP, CATKEY_M_WHEEL_DOWN,
-	CATKEY_COUNT
+	kF1, kF2, kF3,
+	kF4, kF5, kF6,
+	kF7, kF8, kF9,
+	kF10, kF11, kF12,
+
+	kMouse1, kMouse2,
+	kMouse3, kMouse4,
+	kMouse5,
+	kMWheelUp, kMWheelDown,
+	kCount
 };
 
 #include <utility>
+#include <string_view>
 
 #include "functional.hpp"
 
 namespace input {
+
+    // Holds our cat keys as strings
+    static inline std::string_view key_names[] = {
+
+        "NONE",
+        "0", "1", "2",
+        "3", "4", "5",
+        "6", "7", "8",
+        "9", "A", "B",
+        "C", "D", "E",
+        "F", "G", "H",
+        "I", "J", "K",
+        "L", "M", "N",
+        "O", "P", "Q",
+        "R", "S", "T",
+        "U", "V", "W",
+        "X", "Y", "Z",
+
+        "ESCAPE",
+        "LBRACKET", "RBRACKET",
+        "SEMICOLON", "APOSTROPHE",
+        "BACKQUOTE", "COMMA",
+        "PERIOD", "SLASH",
+        "BACKSLASH", "MINUS",
+        "EQUAL", "ENTER",
+        "SPACE", "BACKSPACE",
+        "TAB", "CAPSLOCK",
+
+        "INSERT", "DELETE",
+        "HOME", "END",
+        "PAGEUP", "PAGEDOWN",
+
+        "LSHIFT", "RSHIFT",
+        "LALT", "RALT",
+        "LCONTROL", "RCONTROL",
+
+        "PAD_0", "PAD_1", "PAD_2",
+        "PAD_3", "PAD_4", "PAD_5",
+        "PAD_6", "PAD_7", "PAD_8",
+        "PAD_9",
+
+        "PAD_DIVIDE", "PAD_MULTIPLY",
+        "PAD_MINUS", "PAD_PLUS",
+        "PAD_ENTER", "PAD_DECIMAL",
+
+        "UP", "LEFT",
+        "DOWN", "RIGHT",
+
+        "F1", "F2", "F3",
+        "F4", "F5", "F6",
+        "F7", "F8", "F9",
+        "F10", "F11", "F12",
+
+        "MOUSE_1", "MOUSE_2",
+        "MOUSE_3", "MOUSE_4",
+        "MOUSE_5",
+        "M_WHEEL_UP", "M_WHEEL_DOWN"
+    };
 
 // Forward defines, meant to be defined by you
 bool GetKey(CatKey k);
 std::pair<int, int> GetMouse();
 std::pair<int, int> GetBounds();
 
+namespace events {
+
 // These are already defined, just use them like normal
-extern cat::Event<std::pair<int, int>> bounds_event;
-extern cat::Event<std::pair<int, int>> mouse_event;
-extern cat::Event<CatKey, bool> key_event;
+extern cat::FastEvent<std::pair<int, int>> bounds;
+extern cat::FastEvent<std::pair<int, int>> mouse;
+extern cat::FastEvent<CatKey, bool> key;
+
+}
 
 }

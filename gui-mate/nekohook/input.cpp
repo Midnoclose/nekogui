@@ -5,8 +5,12 @@
 
 namespace input {
 
-cat::Event<std::pair<int, int>> bounds_event;
-cat::Event<std::pair<int, int>> mouse_event;
-cat::Event<CatKey, bool> key_event;
 
-}
+
+namespace events {
+
+cat::FastEvent<std::pair<int, int>> bounds;
+cat::FastEvent<std::pair<int, int>> mouse;
+cat::FastEvent<CatKey, bool> key;
+
+}}
