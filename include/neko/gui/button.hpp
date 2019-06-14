@@ -1,9 +1,27 @@
 
+/*
+ * Nekogui: Dumb ways to do existing things
+ * Copyright (C) 2018 Rebekah Rowe
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #include <functional>
 
 #include "../root.hpp"
 
-namespace gui {
+namespace ngui {
 
 class Button : public Element {
 public:
@@ -16,23 +34,23 @@ public:
         Root::Cleanup(this);
     }
 private:
-    std::pair<int, int> offset = {0, 0};
-    std::pair<int, int> size = {0, 0};
-    std::pair<int, int> text_offset = {0,0};
+    Vec2d offset = {0, 0};
+    Vec2d size = {0, 0};
+    Vec2d text_offset = {0,0};
 public:
     virtual void Draw() const {
-        std::pair<int, int> abs = this->GetAbsPos();
-        std::pair<int, int> size = this->GetSize();
+        Vec2d abs = this->GetAbsPos();
+        Vec2d size = this->GetSize();
         // box
         draw::RectFilled(abs.first, abs.second, size.first, size.second, GetBackgroundColor());
         draw::Rect(abs.first, abs.second, size.first, size.second, GetOutlineColor());
         // text
         draw::String(this->display_text.c_str(), abs + this->text_offset);
     }
-    virtual std::pair<int, int> GetOffset() const { return this->offset; }; // Where is it located in relation to the parent
-    virtual void SetOffset(const std::pair<int, int>& value) { this->offset = value; }
-    virtual std::pair<int, int> GetSize() const { return size; }
-    virtual void SetSize(const std::pair<int, int>& value) {
+    virtual Vec2d GetOffset() const { return this->offset; }; // Where is it located in relation to the parent
+    virtual void SetOffset(const Vec2d& value) { this->offset = value; }
+    virtual Vec2d GetSize() const { return size; }
+    virtual void SetSize(const Vec2d& value) {
         this->size.first = std::min(value.first, (this->parent->GetSize().first - this->GetOffset().first) + 4);
         this->size.second = GetMaxCharSize().second + 4;
         this->UpdateTextOffset();

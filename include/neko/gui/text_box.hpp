@@ -7,7 +7,7 @@
 
 #include "../root.hpp"
 
-namespace gui {
+namespace ngui {
 
 class TextInputBox : public Element {
 public:
@@ -21,18 +21,18 @@ public:
     virtual ~TextInputBox(){}
 private:
 
-    std::pair<int, int> offset = {0, 0};
-    std::pair<int, int> size = {0, 0};
+    Vec2d offset = {0, 0};
+    Vec2d size = {0, 0};
     // draw cache
-    std::pair<int, int> pos_offset = {3, 0};// start(and end if any)
+    Vec2d pos_offset = {3, 0};// start(and end if any)
     std::string draw_string;
     // Curser
     bool pos_blink = false;
     CatTimer pos_timer;
 public:
     virtual void Draw() const {
-        std::pair<int, int> abs = this->GetAbsPos();
-        std::pair<int, int> size = this->GetSize();
+        Vec2d abs = this->GetAbsPos();
+        Vec2d size = this->GetSize();
         // box
         draw::RectFilled(abs.first, abs.second, size.first, size.second, GetBackgroundColor());
         draw::Rect(abs.first, abs.second, size.first, size.second, GetOutlineColor());
@@ -51,20 +51,20 @@ public:
             this->pos_blink = !this->pos_blink;
     }
 
-    virtual std::pair<int, int> GetOffset() const { return this->offset; };
-    virtual void SetOffset(const std::pair<int, int>& value) { this->offset = value; }
-    virtual std::pair<int, int> GetSize() const { return size; }
-    virtual void SetSize(const std::pair<int, int>& value) {
-        const std::pair<int, int>& max_char_size = GetMaxCharSize();
+    virtual Vec2d GetOffset() const { return this->offset; };
+    virtual void SetOffset(const Vec2d& value) { this->offset = value; }
+    virtual Vec2d GetSize() const { return size; }
+    virtual void SetSize(const Vec2d& value) {
+        const Vec2d& max_char_size = GetMaxCharSize();
         this->size.first = std::min(value.first, (this->parent->GetSize().first - this->GetOffset().first) + 4);
         this->size.second = max_char_size.second + 4;
     }
 
     // User input
-    virtual void MouseEvent(const std::pair<int, int>& mouse_pos, const std::pair<int, int>& move_delta) {
+    virtual void MouseEvent(const Vec2d& mouse_pos, const Vec2d& move_delta) {
         // TODO, selection
     }
-    virtual void KeyEvent(CatKey key, bool state) {
+    virtual void KeyEvent(Key key, bool state) {
         if (!state)
             return;
 
