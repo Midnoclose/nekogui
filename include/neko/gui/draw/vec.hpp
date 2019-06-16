@@ -1,6 +1,6 @@
 
 /*
- * nGui: Dumb ways to do existing things
+ * Nekogui: Dumb ways to do existing things
  * Copyright (C) 2018 Rebekah Rowe
  *
  * This program is free software: you can redistribute it and/or modify
@@ -19,23 +19,28 @@
 
 #pragma once
 
-namespace neko::gui {
-namespace internal {
+#include <cassert>
+#include <initializer_list>
 
-template<typename T>
+namespace neko::gui {
+
 class Vec2d {
 public:
-    using ThisT = Vec2d<T>;
-    Vec2d(T _x, T _y) : x(_x), y(_y) {}
-    T x, y;
-    bool operator=(const ThisT& i) { return this->x == i.x && this->y == i.y; }
-    ThisT operator+(const ThisT& i) { return ThisT(this->x + i.x, this->y + i.y); }
-    ThisT operator-(const ThisT& i) { return ThisT(this->x - i.x, this->y - i.y); }
+    using Type = float;
+    inline Vec2d(Type _x = 0, Type _y = 0) : x(_x), y(_y) {}
+    inline Vec2d(const std::initializer_list<Type> l) {
+		assert(l.size() == 2);
+		this->x = *l.begin();
+		this->y = *(l.begin() + 1);
+	}
+    Type x, y;
+    inline bool operator=(const Vec2d& i) const { return this->x == i.x && this->y == i.y; }
+    inline bool operator==(const Vec2d& i) const { return this->x == i.x && this->y == i.y; }
+    inline Vec2d operator+(const Vec2d& i) const { return Vec2d(this->x + i.x, this->y + i.y); }
+    inline Vec2d operator-(const Vec2d& i) const { return Vec2d(this->x - i.x, this->y - i.y); }
+    inline Vec2d operator/(Type i) const { return Vec2d(this->x / i, this->y / i); }
+    inline bool operator>(const Vec2d& i) const { return this->x > i.x && this->y > i.y; }
+    inline bool operator<(const Vec2d& i) const { return this->x < i.x && this->y < i.y; }
 };
-}
-#if !defined(NGUI_HEADLESS)
-using Vec2d = internal::Vec2d<float>;
-#else
-using Vec2d = internal::Vec2d<int>;
-#endif
+
 }

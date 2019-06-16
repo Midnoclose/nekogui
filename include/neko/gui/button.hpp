@@ -19,50 +19,27 @@
 
 #include <functional>
 
-#include "../root.hpp"
+#include "element.hpp"
 
-namespace ngui {
+namespace neko::gui {
 
 class Button : public Element {
 public:
-    Button(Element* _parent, std::string_view _display_text, std::function<void()> _callback)
-        : Element(_parent), display_text(_display_text), callback(_callback) {
-        this->UpdateTextOffset();
-    }
-    virtual ~Button(){
-        // in case we get pressed and removed
-        Root::Cleanup(this);
-    }
+    Button(Element* _parent, std::string_view _display_text, std::function<void()> _callback);
+    ~Button() override;
+    void Draw(const Vec2d&) const override;
+    
+    void OnMouseEnter() override;
+	void OnMouseLeave() override;
+	void OnMousePress() override;
+	void OnMouseRelease() override;
+	
+    void SetSize(const Vec2d&) override;
 private:
-    Vec2d offset = {0, 0};
-    Vec2d size = {0, 0};
-    Vec2d text_offset = {0,0};
-public:
-    virtual void Draw() const {
-        Vec2d abs = this->GetAbsPos();
-        Vec2d size = this->GetSize();
-        // box
-        draw::RectFilled(abs.first, abs.second, size.first, size.second, GetBackgroundColor());
-        draw::Rect(abs.first, abs.second, size.first, size.second, GetOutlineColor());
-        // text
-        draw::String(this->display_text.c_str(), abs + this->text_offset);
-    }
-    virtual Vec2d GetOffset() const { return this->offset; }; // Where is it located in relation to the parent
-    virtual void SetOffset(const Vec2d& value) { this->offset = value; }
-    virtual Vec2d GetSize() const { return size; }
-    virtual void SetSize(const Vec2d& value) {
-        this->size.first = std::min(value.first, (this->parent->GetSize().first - this->GetOffset().first) + 4);
-        this->size.second = GetMaxCharSize().second + 4;
-        this->UpdateTextOffset();
-    }
-    virtual void KeyEvent(CatKey key, bool state) {
-        if (!state && key == CatKey::kMouse1)
-            this->callback();
-
-    }
-    virtual std::string_view GetName() const { return "button"; }
-private:
-    void UpdateTextOffset() { this->text_offset = (this->GetSize() - draw::GetStringSize(display_text.c_str())) / 2; }
+    void UpdateOffsets();
+    bool hovered = false;
+    bool pressed = false;
+    Vec2d text_offset;
     const std::string display_text;
     const std::function<void()> callback;
 };

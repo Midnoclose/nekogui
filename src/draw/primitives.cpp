@@ -17,30 +17,15 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#pragma once
-
-#include <neko/color.hpp>
-
-#include "vec.hpp"
-
-#include "font.hpp"
+#include "draw/primitives.hpp"
 
 namespace neko::gui::draw {
 
-class DrawMachine {
-public:
-	DrawMachine();
-	virtual ~DrawMachine() = 0;
-    virtual void Line(const Vec2d&, const Vec2d&, RGBColor) const = 0;
-    virtual void RectOutline(const Vec2d&, const Vec2d&, RGBColor) const;
-    virtual void RectFilled(const Vec2d&, const Vec2d&, RGBColor) const;
-    virtual void Circle(const Vec2d& w, float radius, int steps, RGBColor) const;
-    virtual void String(const Vec2d& w, std::string_view, RGBColor) const = 0;
-    virtual Vec2d GetLength(std::string_view) const = 0;
-    RGBColor outline;
-    RGBColor background;
-    RGBColor foreground;
-    Font font;
-};
+void Line(const Vec2d&, const Vec2d&, RGBColor);
+void RectOutline(const Vec2d&, const Vec2d&, RGBColor);
+void RectFilled(const Vec2d&, const Vec2d&, RGBColor);
+void Circle(const Vec2d& w, int steps, RGBColor);
+void String(const Vec2d w, std::string_view, Font, RGBColor);
+Vec2d GetLength(std::string_view, Font);
 
 }

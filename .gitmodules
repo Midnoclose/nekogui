@@ -2,3 +2,6 @@
 	path = libglez
 	url = https://github.com/nullworks/libglez/
 	branch = cached-rendering
+[submodule "external/nekolib"]
+	path = external/nekolib
+	url = https://github.com/oneechanhax/nekolib

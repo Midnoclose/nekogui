@@ -1,6 +1,6 @@
 
 /*
- * nGui: Dumb ways to do existing things
+ * Nekogui: Dumb ways to do existing things
  * Copyright (C) 2018 Rebekah Rowe
  *
  * This program is free software: you can redistribute it and/or modify
@@ -16,3 +16,21 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
+
+#pragma once
+
+#include <neko/color.hpp>
+
+#include "font.hpp"
+#include "vec.hpp"
+
+namespace neko::gui::draw {
+
+void Line(const Vec2d&, const Vec2d&, RGBColor);
+void RectOutline(const Vec2d&, const Vec2d&, RGBColor);
+void RectFilled(const Vec2d&, const Vec2d&, RGBColor);
+void Circle(const Vec2d& w, float radius, int steps, RGBColor);
+void String(const Vec2d w, std::string_view, Font, RGBColor);
+Vec2d GetLength(std::string_view, Font);
+
+}

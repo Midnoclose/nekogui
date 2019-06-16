@@ -17,40 +17,46 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include "button.hpp"
+#include "element.hpp"
 
-#include "../root.hpp"
+namespace neko::gui {
 
-namespace neko::gui
-
-/*class Titlebar;
-class ActingWindow : public Containor {
+class Containor : public Element {
 public:
-    ActingWindow(Containor* _parent);
-    std::string title;
-private:
-    Titlebar* title_bar;
-};
-
-class TitleBar : public Element {
-public:
-    TitleBar(ActingWindow* parent, Containor* _parent_containor, const std::string* const _display_text, bool _close_button);
-    ~TitleBar() override;
-public:
+    using Element::Element;
+    virtual ~Containor() override;
     void Draw(const Vec2d&) const override;
+
     void OnMouseMove(const Vec2d&, const Vec2d&) override;
+    void OnMouseEnter() override;
+    void OnMouseLeave() override;
     void OnMousePress() override;
     void OnMouseRelease() override;
-    void SetSize(const Vec2d&) override;
+    void OnKeyPress(Key) override;
+    void OnKeyRelease(Key) override;
+
+	void Add(Element*); // inline
+    void Add(Element*, const Vec2d&, bool floating); // static and floating
+    void Clear();
+    Element* WithinCollision(const Vec2d&, bool floating);
 private:
-    Containor* parent;
-
-    void UpdateTextOffset();
-    const std::string* const display_text;
-    Vec2d text_offset;
-
-    Vec2d close_button_pos;
-    Button* close_button = nullptr;
-};*/
+	Vec2d GetPos(Element*);
+	Vec2d FindPos(Element*);
+    enum class Positioning {
+        kInline,
+        kStatic,
+        kFloating
+    };
+    struct ElmInfo {
+        Element* element;
+        Vec2d pos;
+        Positioning state;
+    };
+    std::vector<ElmInfo> elements;
+    Element* hovered = nullptr;
+    Element* focused = nullptr;
+    Element* pressed = nullptr;
+    Vec2d mouse_pos;
+};
 
 }

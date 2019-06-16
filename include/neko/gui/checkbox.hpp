@@ -19,34 +19,26 @@
 
 #pragma once
 
+#include "element.hpp"
+
 namespace neko::gui {
 
 class CheckBox : public Element {
 public:
-    CheckBox(Element* _parent, bool* _value, std::function<void()> _callback);
-
-    void Draw(const Vec2d& abs) override;
+    CheckBox(Element* _parent, bool* _value, std::function<void()> _callback = [](){});
+    ~CheckBox() override;
+    void Draw(const Vec2d& abs) const override;
 
     void OnMouseEnter() override;
-	void OnMouseLeave();
-	void OnMousePress();
-	void OnMouseRelease();
-
-	void SetMaxSize(const Vec2d&);
-	void SetSize(const Vec2d&);
-	Vec2d GetSize() = 0;
-    Vec2d GetMaxSize() = 0;
+	void OnMouseLeave() override;
+	void OnMousePress() override;
+	void OnMouseRelease() override;
+    
 protected:
-    Vec2d size;
-    bool hovered;
-    bool entered;
-    bool* value;
+    std::function<void()> callback;
+    bool pressed = false;
+    bool hovered = false;
+    bool* const value;
 };
-void CheckBox::Draw(const Vec2d& abs) {
-    Vec2d size = this->GetSize();
-    this->draw_api->RectFilled(abs, size, this->draw_api->background);
-    this->draw_api->RectOutline(abs, size, this->draw_api->outline);
-    if (*this->value)
-        this->draw_api->RectFilled(abs, size, this->draw_api->outline);
-}
+
 }

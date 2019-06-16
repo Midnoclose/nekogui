@@ -1,6 +1,6 @@
 
 /*
- * nGui: Dumb ways to do existing things
+ * Nekogui: Dumb ways to do existing things
  * Copyright (C) 2018 Rebekah Rowe
  *
  * This program is free software: you can redistribute it and/or modify
@@ -24,15 +24,29 @@
 #include <glez/font.hpp>
 #endif
 
-namespace neko::gui::font {
+namespace neko::gui::draw {
 
-#if defined(NGUI_HEADLESS)
-using Handle = void*;
-#elif defined(NGUI_OPENGL)
+namespace font {
+
+#if defined(NGUI_OPENGL)
 using Handle = glez::font*;
+#else
+using Handle = void*;
 #endif
 Handle Load(fs::path, std::size_t);
-Handle Load(const char* name);
+Handle Load(const char* name, std::size_t);
 void Unload(Handle);
+
+}
+
+class Font {
+public:
+	Font();
+	Font(fs::path, std::size_t);
+	Font(const char* name, std::size_t);
+	~Font();
+private:
+	font::Handle handle;
+};
 
 }

@@ -19,37 +19,15 @@
 
 #pragma once
 
-#include <utility>
-#include <string_view>
+#include "draw.hpp"
+namespace neko::gui::draw {
 
-#include "draw/draw.hpp"
-#include "input/input.hpp"
-
-namespace neko::gui {
-
-class Element {
+class Buffer : public {
 public:
-    Element(Element* _parent);	
-    virtual ~Element() = 0;
-
-    draw::DrawMachine* draw_api;
-    virtual void Draw(const Vec2d&) const = 0;
-
-    virtual void OnMouseMove(const Vec2d& mouse_pos, const Vec2d& move_delta);
-	virtual void OnMouseEnter();
-	virtual void OnMouseLeave();
-	virtual void OnMousePress();
-	virtual void OnMouseRelease();
-	virtual void OnKeyPress(Key);
-	virtual void OnKeyRelease(Key);
-
-    virtual void SetSize(const Vec2d&);
-	void SetMaxSize(const Vec2d&);
-	Vec2d GetSize() const;
-    Vec2d GetMaxSize() const;
+    Buffer(Vec2d size);
+    void Line
+    void Clamp();
 private:
-    Vec2d size;
-    Vec2d max_size = {1080, 1080};
+    std::vector<RGBColor> size;
 };
-
 }

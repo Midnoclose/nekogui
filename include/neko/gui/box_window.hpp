@@ -28,6 +28,8 @@ namespace neko::gui::window {
 // TODO: we need a way to do pressed, how do we get what is pressed
 class Box : public Base {
 public:
+    using Base::Base;
+    ~Box() override;
 
     virtual void Draw() const {
         Vec2d size = this->GetSize();
@@ -35,16 +37,36 @@ public:
         draw::Rect(abs, size, GetOutlineColor());
         this->Base::Draw();
     }
+};
 
-    virtual void MouseEvent(const Vec2d& mouse_pos, const Vec2d& move_delta) {
-        this->SetOffset(this->GetOffset() + move_delta);
-    }
+class Base : public Element {
+public:
+    using Element::Element;
+    ~Base() override;
 
-    virtual Element* WithinCollision(const Vec2d& mouse_pos) {
-        if (Element* ret = this->Containor::WithinCollision(mouse_pos))
-            return ret;
-        return this->Element::WithinCollision(mouse_pos);
+    void KeyEvent(Key k, bool state) override;
+    void MouseEvent(const Vec2d& mouse_pos, const Vec2d& move_delta);
+    void OnMouseEnter() override;
+    void OnMouseLeave() override;
+    void OnMousePress() override;
+    void OnMouseRelease() override;
+    void OnKeyPress(Key key) override;
+    void OnKeyRelease(Key key) override;
+
+    void Add(Element*);
+    void Clear();
+private:
+    struct PosInfo {
+        Element* element;
+        Vec2d pos;
+        enum State {
+            kInline,
+            kStatic,
+            kFloating
+        } state;
     }
+    Element* hovered = nullptr;
+    std::vector<PosInfo> elements;
 };
 
 }
