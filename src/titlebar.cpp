@@ -17,11 +17,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include "titlebar.hpp"
+//#include "titlebar.hpp"
 
 namespace neko::gui {
 
-TitleBar::Titlebar(ActingWindow* _parent, const std::string* const _display_text, bool _close_button)
+/*TitleBar::Titlebar(ActingWindow* _parent, const std::string* const _display_text, bool _close_button)
         : Element(_parent), display_text(_display_text) {
         if (_close_button) {
             close_button = new Button(this, "X", [this](){
@@ -61,6 +61,6 @@ void Titlebar::SetSize(const Vec2d& value) {
     if (this->close_button)
         this->close_button->SetSize({this->size.y, this->size.y});
     this->UpdateOffsets();
-}
+}*/
 
 }

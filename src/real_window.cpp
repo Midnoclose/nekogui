@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-
+#include <iostream>
 #include <neko/string.hpp>
 
 #include "real_window.hpp"
@@ -25,7 +25,7 @@ namespace neko::gui {
 
 #if defined(__linux__)
 // https://www.khronos.org/opengl/wiki/Tutorial:_OpenGL_3.0_Context_Creation_(GLX)
-RealWindow::RealWindow(const Vec2d& size) : Containor(nullptr) {
+RealWindow::RealWindow(const Vec2d& size) : Containor(this) {
 
     this->display = XOpenDisplay(nullptr);
     if (!this->display)
@@ -72,9 +72,12 @@ RealWindow::~RealWindow() {
 }
 
 void RealWindow::Draw() {
+    this->Draw({0, 0});
+}
+void RealWindow::Draw(const Vec2d& offset) const {
     //glXMakeCurrent(this->display, this->window, glx_state.context);
     glClear(GL_COLOR_BUFFER_BIT);
-    this->Containor::Draw({0, 0});
+    this->Containor::Draw(offset);
     glXSwapBuffers(this->display, this->window);
 }
 
@@ -119,6 +122,9 @@ GLXFBConfig RealWindow::GetFBConfig() {
 
 GLXContext RealWindow::GetContext(GLXFBConfig* fb_config){
     auto extentions = sepstr(glXQueryExtensionsString(this->display, DefaultScreen(this->display)));
+    for(auto& i : extentions) {
+        std::cout << i << std::endl;
+    }
     auto find = std::find(extentions.begin(), extentions.end(), "GLX_ARB_create_context");
     if (find != extentions.end())
         return glXCreateNewContext(this->display, *fb_config, GLX_RGBA_TYPE, NULL, GL_TRUE);

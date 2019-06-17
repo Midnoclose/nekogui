@@ -28,12 +28,12 @@ public:
     Button(Element* _parent, std::string_view _display_text, std::function<void()> _callback);
     ~Button() override;
     void Draw(const Vec2d&) const override;
-    
+
     void OnMouseEnter() override;
 	void OnMouseLeave() override;
 	void OnMousePress() override;
 	void OnMouseRelease() override;
-	
+
     void SetSize(const Vec2d&) override;
 private:
     void UpdateOffsets();

@@ -21,38 +21,6 @@
 
 namespace neko::gui {
 
-Button::Button(Element* _parent, std::string_view _display_text, std::function<void()> _callback)
-    : Element(_parent), display_text(_display_text), callback(_callback) {
-    this->UpdateOffsets();
-}
-Button::~Button() {}
 
-void Button::Draw(const Vec2d& abs) const {
-    Vec2d size = this->GetSize();
-    this->draw_api->RectFilled(abs, size, this->draw_api->background);
-    if (this->pressed)
-        this->draw_api->RectFilled(abs, size, this->draw_api->foreground.Transparent(30));
-    this->draw_api->RectOutline(abs, size, this->draw_api->outline);
-    this->draw_api->String(abs + this->text_offset, this->display_text, RGBColor::white);
-}
-
-void Button::SetSize(const Vec2d& value) {
-	Vec2d size;
-    size.x = value.x;
-    size.y = this->draw_api->GetLength(this->display_text).y + 4;
-    this->Element::SetSize(size);
-    this->UpdateOffsets();
-}
-
-void Button::OnMouseEnter() { this->hovered = true; }
-void Button::OnMouseLeave() { this->hovered = false; }
-void Button::OnMousePress() { this->pressed = true; }
-void Button::OnMouseRelease() {
-    if (this->hovered)
-        this->callback();
-}
-void Button::UpdateOffsets() {
-    this->text_offset = (this->GetSize() - this->draw_api->GetLength(display_text)) / 2;
-}
 
 }

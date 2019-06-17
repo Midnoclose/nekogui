@@ -33,7 +33,7 @@ public:
 	void OnMouseLeave() override;
 	void OnMousePress() override;
 	void OnMouseRelease() override;
-    
+
 protected:
     std::function<void()> callback;
     bool pressed = false;

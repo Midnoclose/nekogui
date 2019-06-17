@@ -21,6 +21,9 @@
 
 namespace neko::gui {
 
+Containor::Containor(Element* _parent) {
+    this->draw_api = _parent->draw_api;
+}
 Containor::~Containor(){}
 
 void Containor::Draw(const Vec2d& abs) const {

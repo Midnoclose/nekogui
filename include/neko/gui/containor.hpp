@@ -23,13 +23,11 @@ namespace neko::gui {
 
 class Containor : public Element {
 public:
-    using Element::Element;
-    virtual ~Containor() override;
+    Containor(Element* parent);
+    ~Containor() override;
     void Draw(const Vec2d&) const override;
 
     void OnMouseMove(const Vec2d&, const Vec2d&) override;
-    void OnMouseEnter() override;
-    void OnMouseLeave() override;
     void OnMousePress() override;
     void OnMouseRelease() override;
     void OnKeyPress(Key) override;
@@ -37,9 +35,10 @@ public:
 
 	void Add(Element*); // inline
     void Add(Element*, const Vec2d&, bool floating); // static and floating
+    void Del(Element*);
     void Clear();
     Element* WithinCollision(const Vec2d&, bool floating);
-private:
+protected:
 	Vec2d GetPos(Element*);
 	Vec2d FindPos(Element*);
     enum class Positioning {

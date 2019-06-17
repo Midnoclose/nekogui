@@ -14,6 +14,11 @@ add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/external/nekolib")
 file(GLOB_RECURSE sources "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
 add_library(nekogui STATIC ${sources})
 target_include_directories(nekogui PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include/neko/gui")
-target_include_directories(nekogui PUBLIC nekolib)
+target_include_directories(nekogui PUBLIC nekolib "${CMAKE_CURRENT_SOURCE_DIR}/include/")
 
-target_link_libraries(nekogui PUBLIC nekolib)
+target_link_libraries(nekogui PUBLIC nekolib GL X11)
+
+
+add_executable(nekogui-example "${CMAKE_CURRENT_SOURCE_DIR}/example/main.cpp")
+target_include_directories(nekogui-example PUBLIC nekogui)
+target_link_libraries(nekogui-example PUBLIC nekogui)

@@ -26,47 +26,43 @@
 namespace neko::gui::window {
 
 // TODO: we need a way to do pressed, how do we get what is pressed
-class Box : public Base {
+class Box : public Containor {
 public:
-    using Base::Base;
+    Box(Containor* _parent);
     ~Box() override;
 
-    virtual void Draw() const {
-        Vec2d size = this->GetSize();
-        draw::RectFilled(abs, this->draw_api);
-        draw::Rect(abs, size, GetOutlineColor());
-        this->Base::Draw();
-    }
-};
-
-class Base : public Element {
-public:
-    using Element::Element;
-    ~Base() override;
-
-    void KeyEvent(Key k, bool state) override;
-    void MouseEvent(const Vec2d& mouse_pos, const Vec2d& move_delta);
-    void OnMouseEnter() override;
-    void OnMouseLeave() override;
+    void Draw() const override;
     void OnMousePress() override;
-    void OnMouseRelease() override;
-    void OnKeyPress(Key key) override;
-    void OnKeyRelease(Key key) override;
-
-    void Add(Element*);
-    void Clear();
+	void OnMouseRelease() override;
+    void OnMouseMove(const Vec2d&, const Vec2d&) override;
 private:
-    struct PosInfo {
-        Element* element;
-        Vec2d pos;
-        enum State {
-            kInline,
-            kStatic,
-            kFloating
-        } state;
-    }
-    Element* hovered = nullptr;
-    std::vector<PosInfo> elements;
+    Containor*  parent;
+    bool box_pressed;
 };
+
+void Box::Draw() {
+   Vec2d size = this->GetSize();
+   draw::RectFilled(abs, this->draw_api);
+   draw::Rect(abs, size, GetOutlineColor());
+   this->Containor::Draw();
+}
+
+void Box::OnMousePress() {
+    if (!WithinCollision(this->mouse_pos))
+        this->box_pressed = true;
+    else
+        this->Containor::OnMousePress();
+}
+
+void Box::OnMouseRelease() {
+    if (this->box_pressed)
+        this->box_pressed = false;
+    else
+        this->Containor::OnMouseRelease();
+}
+
+void Box::OnMouseMove(const Vec2d&, const Vec2d& delta) {
+
+}
 
 }

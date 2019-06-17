@@ -31,8 +31,8 @@ class RealWindow : public Containor {
 public:
     RealWindow(const Vec2d& size);
     ~RealWindow() override;
-private:
     void Draw();
+private:
     void Draw(const Vec2d&) const override;
 #if defined(__linux__)
     Display *display;

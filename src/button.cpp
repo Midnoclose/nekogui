@@ -22,7 +22,8 @@
 namespace neko::gui {
 
 Button::Button(Element* _parent, std::string_view _display_text, std::function<void()> _callback)
-    : Element(_parent), display_text(_display_text), callback(_callback) {
+    : display_text(_display_text), callback(_callback) {
+    this->draw_api = _parent->draw_api;
     this->UpdateOffsets();
 }
 Button::~Button() {}

@@ -19,7 +19,3 @@ CMakeCache.txt
 cmake_install.cmake
 Makefile
 build/*
-
-# Binaries
-libgui-mate.a
-example

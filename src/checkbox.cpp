@@ -21,9 +21,11 @@
 
 namespace neko::gui {
 
-CheckBox::CheckBox(Element* _parent, bool* _value, std::function<void()> _callback) 
-	: Element(_parent), value(_value), callback(_callback) {}
-	
+CheckBox::CheckBox(Element* _parent, bool* _value, std::function<void()> _callback)
+	: value(_value), callback(_callback) {
+    this->draw_api = _parent->draw_api;
+}
+
 CheckBox::~CheckBox() {}
 
 void CheckBox::Draw(const Vec2d& abs) const {

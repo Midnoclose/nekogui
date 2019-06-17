@@ -29,8 +29,7 @@ namespace neko::gui {
 
 class Element {
 public:
-    Element(Element* _parent);	
-    virtual ~Element() = 0;
+    virtual ~Element();
 
     draw::DrawMachine* draw_api;
     virtual void Draw(const Vec2d&) const = 0;

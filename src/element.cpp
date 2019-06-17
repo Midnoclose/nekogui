@@ -18,16 +18,14 @@
  */
 
 #include <algorithm>
- 
+
 #include "element.hpp"
 
 namespace neko::gui {
 
-Element::Element(Element* _parent) {
-    if (_parent)
-        this->draw_api = _parent->draw_api;
-}
+Element::~Element(){}
 
+void Element::OnMouseMove(const Vec2d&, const Vec2d&){}
 void Element::OnMouseEnter() {}
 void Element::OnMouseLeave() {}
 void Element::OnMousePress() {}
