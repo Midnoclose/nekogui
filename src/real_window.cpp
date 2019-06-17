@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-#include <iostream>
+
 #include <neko/string.hpp>
 
 #include "real_window.hpp"
@@ -122,9 +122,6 @@ GLXFBConfig RealWindow::GetFBConfig() {
 
 GLXContext RealWindow::GetContext(GLXFBConfig* fb_config){
     auto extentions = sepstr(glXQueryExtensionsString(this->display, DefaultScreen(this->display)));
-    for(auto& i : extentions) {
-        std::cout << i << std::endl;
-    }
     auto find = std::find(extentions.begin(), extentions.end(), "GLX_ARB_create_context");
     if (find != extentions.end())
         return glXCreateNewContext(this->display, *fb_config, GLX_RGBA_TYPE, NULL, GL_TRUE);
