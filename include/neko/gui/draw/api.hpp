@@ -19,11 +19,11 @@
 
 #include "draw.hpp"
 
-namespace neko::gui::draw {
+namespace neko::gui::draw::api {
 
 void begin();
 void end();
 
-extern DrawMachine* api_machine;
+extern DrawMachine* machine;
 
 }

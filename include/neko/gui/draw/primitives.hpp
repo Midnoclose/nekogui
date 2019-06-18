@@ -30,7 +30,7 @@ void Line(const Vec2d&, const Vec2d&, RGBColor);
 void RectOutline(const Vec2d&, const Vec2d&, RGBColor);
 void RectFilled(const Vec2d&, const Vec2d&, RGBColor);
 void Circle(const Vec2d& w, float radius, int steps, RGBColor);
-void String(const Vec2d w, std::string_view, Font, RGBColor);
-Vec2d GetLength(std::string_view, Font);
+void String(const Vec2d w, std::string_view, const Font&, RGBColor);
+Vec2d GetLength(std::string_view, const Font&);
 
 }

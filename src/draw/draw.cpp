@@ -23,6 +23,10 @@
 
 namespace neko::gui::draw {
 
+DrawMachine::DrawMachine()
+    : outline(RGBColor::pink), background(RGBColor::darkgray), foreground(RGBColor::lightgray){
+}
+DrawMachine::~DrawMachine(){}
 void DrawMachine::RectOutline(const Vec2d& abs, const Vec2d& size, RGBColor color) const {
     this->Line(abs, {size.x, 0}, color); // Top
     this->Line(abs, {0, size.y}, color); // Left

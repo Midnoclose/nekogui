@@ -18,6 +18,9 @@
  */
 
 #include <neko/string.hpp>
+#include <glez/glez.hpp>
+
+#include "draw/api.hpp"
 
 #include "real_window.hpp"
 
@@ -26,6 +29,11 @@ namespace neko::gui {
 #if defined(__linux__)
 // https://www.khronos.org/opengl/wiki/Tutorial:_OpenGL_3.0_Context_Creation_(GLX)
 RealWindow::RealWindow(const Vec2d& size) : Containor(this) {
+    #if !defined(NGUI_OPENGL)
+        #pragma message("Real window requires opengl to work")
+    #endif
+    glez::init(size.x, size.y);
+    this->draw_api = draw::api::machine;
 
     this->display = XOpenDisplay(nullptr);
     if (!this->display)
@@ -75,9 +83,11 @@ void RealWindow::Draw() {
     this->Draw({0, 0});
 }
 void RealWindow::Draw(const Vec2d& offset) const {
-    //glXMakeCurrent(this->display, this->window, glx_state.context);
+    glXMakeCurrent(this->display, this->window, this->context);
     glClear(GL_COLOR_BUFFER_BIT);
+    draw::api::begin();
     this->Containor::Draw(offset);
+    draw::api::end();
     glXSwapBuffers(this->display, this->window);
 }
 

@@ -16,16 +16,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
- 
+
 #include <fontconfig/fontconfig.h>
-#if defined(NGUI_OPENGL)
-#include <glez/font.hpp>
-#endif
 
 #include "draw/font.hpp"
 
-namespace neko::gui::draw::font {
+namespace neko::gui::draw {
 
+namespace font {
 Handle Load(const char* name, std::size_t size) { // Font config name
     // Initialize
     static FcConfig* config = FcInitLoadConfigAndFonts();
@@ -42,7 +40,9 @@ Handle Load(const char* name, std::size_t size) { // Font config name
         if (FcPatternGetString(font, FC_FILE, 0, &path) == FcResultMatch) {
             try {
                 ret = Load(fs::path(reinterpret_cast<const char*>(path)), size);
-            }catch(...){}
+            }catch(...){
+                ret = 0;
+            }
         }
     // Cleanup
        FcPatternDestroy(font);
@@ -57,7 +57,29 @@ Handle Load(const char* name, std::size_t size) { // Font config name
 }
 
 Handle Load(fs::path path, std::size_t size) {
-	throw std::runtime_error("TODO: load font " + path.generic_string());
+    #if defined(NGUI_OPENGL)
+        return new OGLFT::Monochrome(path.c_str(), size);
+    #else
+        #pragma message("Fonts not avaiable!")
+    #endif
+}
+
+void Unload(Handle h) {
+    #if defined(NGUI_OPENGL)
+        delete h;
+    #endif
+}
+}
+
+Font::Font() : Font("Monospace", 15) {};
+Font::Font(fs::path p, std::size_t s) {
+    this->handle = font::Load(p, s);
+}
+Font::Font(const char* name, std::size_t s) {
+    this->handle = font::Load(name, s);
+}
+Font::~Font() {
+    font::Unload(this->handle);
 }
 
 }

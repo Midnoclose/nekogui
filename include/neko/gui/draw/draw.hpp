@@ -30,7 +30,7 @@ namespace neko::gui::draw {
 class DrawMachine {
 public:
 	DrawMachine();
-	virtual ~DrawMachine() = 0;
+	virtual ~DrawMachine();
     virtual void Line(const Vec2d&, const Vec2d&, RGBColor) const = 0;
     virtual void RectOutline(const Vec2d&, const Vec2d&, RGBColor) const;
     virtual void RectFilled(const Vec2d&, const Vec2d&, RGBColor) const;

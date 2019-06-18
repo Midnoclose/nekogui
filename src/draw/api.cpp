@@ -17,10 +17,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+#include <glez/glez.hpp>
+
 #include "draw/primitives.hpp"
 #include "draw/draw.hpp"
 
-namespace neko::gui::draw {
+namespace neko::gui::draw::api {
 
 class APIMachine : public DrawMachine{
 public:
@@ -46,6 +48,13 @@ public:
 	}
 };
 
-DrawMachine* api_machine = new APIMachine();
+DrawMachine* machine = new APIMachine();
+
+void begin() {
+    glez::begin();
+}
+void end() {
+    glez::end();
+}
 
 }

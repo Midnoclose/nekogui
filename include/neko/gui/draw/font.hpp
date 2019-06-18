@@ -21,7 +21,7 @@
 
 #include <neko/filesystem.hpp>
 #if defined(NGUI_OPENGL)
-#include <glez/font.hpp>
+#include <oglft/OGLFT.h>
 #endif
 
 namespace neko::gui::draw {
@@ -29,7 +29,7 @@ namespace neko::gui::draw {
 namespace font {
 
 #if defined(NGUI_OPENGL)
-using Handle = glez::font*;
+using Handle = OGLFT::Monochrome*;
 #else
 using Handle = void*;
 #endif
@@ -45,6 +45,7 @@ public:
 	Font(fs::path, std::size_t);
 	Font(const char* name, std::size_t);
 	~Font();
+    font::Handle GetHandle() const { return this->handle; }
 private:
 	font::Handle handle;
 };
